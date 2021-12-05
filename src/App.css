@@ -17,11 +17,28 @@ li, a{
   text-decoration: none;
 }
 
-.header{
+header{
   display: flex;
   justify-content: space-between;
-  width: 80%;
-
+  height: 80px;
+  align-items: center;
 }
 
+.nav-links{
+  display: flex;
+  justify-content: space-between;
+  min-width: 380px;
+  width: 40%;
+}
+
+.nav-links li{
+  padding: .5rem 1rem;
+  border-radius: .3rem;
+  background: rgba(76, 0, 255, 0.297);
+}
+
+.container{
+  width: 90%;
+  margin:auto;
+}
 
