@@ -6,19 +6,22 @@
   box-sizing: border-box;
 }
 
-.App {
-  /* text-align: center; */
+.App{
+  color: whitesmoke;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(0, 0, 48), rgb(63, 0, 0))
 }
 
-header{
-  width:100%;
-  color: rgb(208, 192, 192);
-  background-color: rgb(41, 33, 33);
-  height: 4rem;
+li, a{
+  list-style: none;
+  text-decoration: none;
 }
 
-nav{
-  justify-content: center;
+.header{
   display: flex;
+  justify-content: space-between;
+  width: 80%;
+
 }
+
 
