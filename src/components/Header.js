@@ -6,17 +6,19 @@ function Header({logotype}) {
         console.log('click');
     }
     return (
-        <header className='container'>
+        <header>
+            <nav className='container'>
 
-            <h1 className="logo">{logotype}</h1>
+                <h1 className="logo">{logotype}</h1>
 
-            <ul className="nav-links">
-                <Button liInner='home' onClick={onClick} />
-                <Button liInner='about us' onClick={onClick} />
-                <Button liInner='friends' onClick={onClick} />
-                <Button liInner='my profile' onClick={onClick} />
-            </ul>
+                <div className="nav-links">
+                    <Button liInner='home' onClick={onClick} />
+                    <Button liInner='about us' onClick={onClick} />
+                    <Button liInner='friends' onClick={onClick} />
+                    <Button liInner='my profile' onClick={onClick} />
+                </div>
 
+            </nav>
         </header>
     )
 }
