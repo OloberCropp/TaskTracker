@@ -1,20 +1,34 @@
+import PropTypes from 'prop-types';
 import Button from "./Button";
 
-function Header() {
+function Header({logotype}) {
+    const onClick = ()=> {
+        console.log('click');
+    }
     return (
         <header className='container'>
-            <div className="logo">
-                <h1>HG</h1>
-            </div>
-                <ul className="nav-links">
-                    <Button liInner='home' />
-                    <Button liInner='about us' />
-                    <Button liInner='friends' />
-                    <Button liInner='my profile' />
-                </ul>
+
+            <h1 className="logo">{logotype}</h1>
+
+            <ul className="nav-links">
+                <Button liInner='home' onClick={onClick} />
+                <Button liInner='about us' onClick={onClick} />
+                <Button liInner='friends' onClick={onClick} />
+                <Button liInner='my profile' onClick={onClick} />
+            </ul>
+
         </header>
     )
 }
+
+Header.defaultProps = {
+    logotype: 'HG',
+}
+
+Header.propTypes = {
+    logotype: PropTypes.string.isRequired,
+}
+
 
 
 export default Header

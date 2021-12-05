@@ -34,7 +34,8 @@ header{
 .nav-links li{
   padding: .5rem 1rem;
   border-radius: .3rem;
-  background: rgba(76, 0, 255, 0.297);
+  cursor: pointer;
+  /* background: rgba(76, 0, 255, 0.297); */
 }
 
 .container{
