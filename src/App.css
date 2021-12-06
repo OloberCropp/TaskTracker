@@ -9,7 +9,8 @@
 .App{
   color: whitesmoke;
   width: 100%;
-  background:rgb(0, 0, 48);
+  min-height: 100vh;
+  background:rgb(245, 135, 0);
 }
 
 li, a{
@@ -77,4 +78,26 @@ nav{
   padding: 2rem;
   border-radius: .5rem;
   background: rgba(245, 245, 245, 0.166);
+}
+
+.task{
+  width:100%;
+  min-height: 4rem;
+  height: fit-content;
+  background:rgba(74, 0, 23, 0.602);
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+  padding: 1rem 1rem;
+}
+
+.task h3{
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks{
+  background: rgba(255, 0, 0, 0.249);
+  padding: 1rem;
+  border-radius: .5rem;
+  height: 50vh;
 }
