@@ -1,20 +1,59 @@
 import PropTypes from 'prop-types';
-import Button from './Button';
-import InputForm from './InputForm';
+import { useState } from 'react';
 
-const SetTask = ({title}) => {
-    const onClick = (e) => {
-        // console.log(e.nativeEvent.path[1].children[2].value);
-        console.log(e);
-    }
-    return (
-        <div className='IF container'>
-            <h2 className='if-title'>{title}</h2>
-            <InputForm preInput='Add a new task' type='text' placeholder='Wash a car' />
-            <InputForm preInput='Add date/time' type='datetime-local' />
-            <Button liInner='submit' onClick={onClick} color='rgba(255, 217, 0, 0.3)' />
-        </div>
-    )
+const SetTask = ({onAdd}) => {
+
+	const [text, setText] = useState('');
+	const [day,setDay] = useState('');
+	const [reminder, setReminder] = useState(false);
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+
+		if(!text){
+			alert('Please fill all fields before submit');
+			return;
+		}
+
+		onAdd({ text, day, reminder });
+
+		setText('');
+		setDay('');
+		setReminder(false);
+
+	}
+   
+	return (
+		<form className='add-form container' onSubmit={onSubmit} >
+			<div className='form-control'>
+				<label>Task</label>
+				<input type="text" 
+					placeholder='Add a new Task' 
+					value={text} 
+					onChange={(e)=>setText(e.target.value)} 
+				/>
+			</div>
+			<div className='form-control'>
+				<label>Day & Time</label>
+				<input type='datetime-local' 
+					placeholder='Add Day & Time' 
+					value={day} 
+					onChange={(e)=>setDay(e.target.value)} 
+				/>
+			</div>
+			<div className='form-control'>
+				<label>Set Reminder</label>
+				<input type="checkbox" 
+					placeholder='Add a new Task' 
+					checked={reminder} 
+					value={reminder} 
+					onChange={(e)=>setReminder(e.currentTarget.checked)} 
+				/>
+			</div>
+
+			<input type="submit" value='Confirm Task' className='btn btn-block' />
+		</form>
+	)
 }
 
 SetTask.defaultProps = {
