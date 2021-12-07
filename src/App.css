@@ -149,16 +149,19 @@ nav{
 }
 
 footer{
+  position: fixed;
+  bottom: 0px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .footer-content{
+  width: 90%;
+  margin: auto;
   font-size: .8rem;
   display: flex;
   justify-content: space-between;
-  height: 6rem;
-  align-items: center;
+  height: 4rem;
   color: rgba(245, 245, 245, 0.4);
   margin-top: 2rem;
 }

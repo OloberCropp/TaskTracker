@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <footer>
-            <div className="footer-content container">
+            <div className="footer-content">
                 <h2>InNomineDeorum™</h2>
                 <div>
                     <h3>PointInGrave@gmail.com</h3>

@@ -6,10 +6,9 @@ import SetTask from './components/SetTask';
 import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import About from './components/About';
-// import { Link } from 'react-router-dom';
 
 function App() {
-  const [ showAddTask, setShowAddTask ] = useState(false)
+  const [ showAddTask, setShowAddTask ] = useState(true)
   const [tasks, setTasks] = useState([])
   
   useEffect(()=>{  
@@ -18,7 +17,7 @@ function App() {
       setTasks(tasksFromServer);
     }
     getTasks();
-  })
+  },[])
 
   const fetchTasks = async () =>{
     const res = await fetch('http://localhost:5000/tasks');
@@ -33,14 +32,18 @@ function App() {
   }
   
   const deleteTask = async (id) =>{
-    await fetch('http://localhost:5000/tasks/'+id,
+    const res = await fetch('http://localhost:5000/tasks/'+id,
     {
       method: 'DELETE',
     });
+
+    res.status === 200
+      ? setTasks(tasks.filter((task) => task.id !== id))
+      : alert('Error Deleting This Task')
   }
   
   const addTask = async (task) =>{
-    await fetch('http://localhost:5000/tasks', 
+    const res = await fetch('http://localhost:5000/tasks', 
     {
       method: 'POST',
       headers: {
@@ -48,34 +51,63 @@ function App() {
       }, 
       body: JSON.stringify(task)
     });
+
+    const data = await res.json();
+
+    setTasks([...tasks, data])
   }
 
   const toggleReminder = async (id) => {
     const taskToToggle = await fetchTask(id);
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder};
 
-    await fetch('http://localhost:5000/tasks/'+id,
+    const res = await fetch('http://localhost:5000/tasks/'+id,
     {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json'
       }, 
       body: JSON.stringify(updTask)
-      }
+      })
+
+      const data = await res.json()
+
+      setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: data.reminder } : task
+      )
     )
   }
 
   return (
     <Router>
       <div className="App">
-        <Header />
-        <SetTask onAdd={addTask} />
-        {tasks.length > 0 ? 
-        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> 
-        : <h2 className='tasks container' style={{textAlign:'center', color:'rgb(256, 256, 256, .4)'}} >
-        There's no tasks yet.. 
-        <br /> Add new one with a form above!</h2>}
+        <Header 
+          onAdd={()=> setShowAddTask(!showAddTask)}
+          showAdd={showAddTask}
+        />
         <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                {showAddTask && <SetTask onAdd={addTask} />}
+                {tasks.length > 0 ? (
+                <Tasks 
+                  tasks={tasks} 
+                  onDelete={deleteTask} 
+                  onToggle={toggleReminder} 
+                /> 
+                ) : ( <h2 className='tasks container' 
+                  style={{textAlign:'center', 
+                  color:'rgb(256, 256, 256, .4)'
+                  }} >
+                  There's no tasks yet.. <br /> 
+                  Add new one with a form above!</h2> 
+                )}
+              </>
+            }
+          />
           <Route path='/about' component={About} />
         </Routes>
         <Footer />

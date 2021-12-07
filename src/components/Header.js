@@ -1,36 +1,30 @@
-import PropTypes from 'prop-types';
-import Button from "./Button";
+import PropTypes from 'prop-types'
+import { useLocation } from 'react-router-dom'
+import Button from './Button'
 
-function Header({logotype}) {
-    const onClick = ()=> {
-        console.log('click');
-    }
-    return (
-        <header>
-            <nav className='container'>
+const Header = ({ title, onAdd, showAdd }) => {
+  const location = useLocation()
 
-                <h1 className="logo">{logotype}</h1>
-
-                <div className="nav-links">
-                    <Button liInner='home' onClick={onClick} />
-                    <Button liInner='about us' onClick={onClick} />
-                    <Button liInner='friends' onClick={onClick} />
-                    <Button liInner='my profile' onClick={onClick} />
-                </div>
-
-            </nav>
-        </header>
-    )
+  return (
+    <header className='header'>
+      <h1>{title}</h1>
+      {location.pathname === '/' && (
+        <Button
+          color={showAdd ? 'red' : 'green'}
+          text={showAdd ? 'Close' : 'Add'}
+          onClick={onAdd}
+        />
+      )}
+    </header>
+  )
 }
 
 Header.defaultProps = {
-    logotype: 'HG',
+  title: 'Task Tracker',
 }
 
 Header.propTypes = {
-    logotype: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 }
-
-
 
 export default Header
