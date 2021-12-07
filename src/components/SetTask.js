@@ -28,6 +28,7 @@ const SetTask = ({onAdd}) => {
 			<div className='form-control'>
 				<label>Task</label>
 				<input type="text" 
+					className='task-input'
 					placeholder='Add a new Task' 
 					value={text} 
 					onChange={(e)=>setText(e.target.value)} 
